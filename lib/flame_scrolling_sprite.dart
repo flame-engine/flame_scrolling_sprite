@@ -1,6 +1,7 @@
 library flame_scrolling_sprite;
 
 import 'package:flame/sprite.dart';
+import 'package:flame/components/component.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui';
 
@@ -22,6 +23,8 @@ class ScrollingSprite {
     double spriteY = 0.0,
     double spriteWidth,
     double spriteHeight,
+    double spriteDestWidth,
+    double spriteDestHeight,
     double width,
     double height,
     this.verticalSpeed = 0.0,
@@ -36,8 +39,8 @@ class ScrollingSprite {
     ).then((loadedSprite) {
       _sprite = loadedSprite;
 
-      _spriteWidth = _sprite.size.x;
-      _spriteHeight = _sprite.size.y;
+      _spriteWidth = spriteDestWidth ?? _sprite.size.x;
+      _spriteHeight = spriteDestHeight ?? _sprite.size.y;
 
       _width = width ?? _spriteWidth;
       _height = height ?? _spriteHeight;
@@ -67,8 +70,8 @@ class ScrollingSprite {
       for (var x = 0; x < columns; x++) {
         _chunks.add(
             Rect.fromLTWH(
-                x * _spriteWidth,
-                y * _spriteHeight,
+                (x * _spriteWidth),
+                (y * _spriteHeight),
                 _spriteWidth,
                 _spriteHeight
             )
@@ -80,19 +83,20 @@ class ScrollingSprite {
   void update(double dt) {
     for (var i = 0; i < _chunks.length; i++) {
       Rect _c = _chunks[i];
-      _c = _chunks[i] = _c.translate(horizontalSpeed * dt, verticalSpeed * dt);
 
       if (_c.top > _height && verticalSpeed > 0) {
-        _c = _chunks[i] = Rect.fromLTWH(_c.left, -_spriteHeight, _c.width, _c.height);
+        _c = _chunks[i] = _c.translate(0, -(height + _spriteHeight));
       } else if (_c.bottom < 0 && verticalSpeed < 0) {
-        _c = _chunks[i] = Rect.fromLTWH(_c.left, _spriteHeight, _c.width, _c.height);
+        _c = _chunks[i] = _c.translate(0, height + _spriteHeight);
       }
 
       if (_c.left > _width && horizontalSpeed > 0) {
-        _c = _chunks[i] = Rect.fromLTWH(-_spriteWidth, _c.top, _c.width, _c.height);
+        _c = _chunks[i] = _c.translate(-(_width + _spriteWidth), 0);
       } else if (_c.right < 0 && horizontalSpeed < 0) {
-        _c = _chunks[i] = Rect.fromLTWH(_spriteWidth, _c.top, _c.width, _c.height);
+        _c = _chunks[i] = _c.translate(_width + _spriteWidth, 0);
       }
+
+      _c = _chunks[i] = _c.translate(horizontalSpeed * dt, verticalSpeed * dt);
     }
   }
 
@@ -108,6 +112,7 @@ class ScrollingSprite {
     }
     _chunks.forEach((rect) {
       _sprite.renderRect(canvas, rect);
+      // canvas.drawRect(rect, Paint()..color = Color(0xFFFF0000)..style = PaintingStyle.stroke);
     });
     if (clipToDimensions) {
       canvas.restore();
@@ -115,4 +120,54 @@ class ScrollingSprite {
   }
 
   bool loaded() => _sprite != null && _sprite.loaded();
+}
+
+class ScrollingSpriteComponent extends Component {
+  ScrollingSprite _sprite;
+  double x;
+  double y;
+
+  ScrollingSpriteComponent({
+    @required String spritePath,
+    this.x,
+    this.y,
+    double spriteX = 0.0,
+    double spriteY = 0.0,
+    double spriteWidth,
+    double spriteHeight,
+    double spriteDestWidth,
+    double spriteDestHeight,
+    double width,
+    double height,
+    double verticalSpeed = 0.0,
+    double horizontalSpeed = 0.0,
+    bool clipToDimensions = true,
+  }) {
+    _sprite = ScrollingSprite(
+        spritePath: spritePath,
+        spriteX: spriteX,
+        spriteY: spriteY,
+        spriteWidth: spriteWidth,
+        spriteHeight: spriteHeight,
+        spriteDestWidth: spriteDestWidth,
+        spriteDestHeight: spriteDestHeight,
+        width: width,
+        height: height,
+        verticalSpeed: verticalSpeed,
+        horizontalSpeed: horizontalSpeed,
+        clipToDimensions: clipToDimensions,
+    );
+  }
+
+  @override
+  void update(double dt) {
+    _sprite.update(dt);
+  }
+
+  @override
+  void render(Canvas canvas) {
+    if (_sprite.loaded()) {
+      _sprite.renderAt(x, y, canvas);
+    }
+  }
 }

@@ -19,3 +19,9 @@ flutter:
   assets:
     - assets/images/space.png
     - assets/images/city.png
+
+    - assets/images/desert/clouds.png
+    - assets/images/desert/mountains.png
+    - assets/images/desert/ground.png
+    - assets/images/desert/train.png
+    - assets/images/desert/foreground.png

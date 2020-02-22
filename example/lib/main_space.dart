@@ -17,9 +17,14 @@ class MyGame extends Game {
 
   MyGame(this.size) {
     sprite = ScrollingSprite(
-        spritePath: 'city.png',
+        spritePath: 'space.png',
         width: size.width,
-        horizontalSpeed: 100,
+        height: size.height,
+
+        verticalSpeed: 300,
+
+        spriteDestWidth: 500,
+        spriteDestHeight: 500,
     );
   }
 
@@ -31,7 +36,7 @@ class MyGame extends Game {
   @override
   void render(Canvas canvas) {
     if (sprite.loaded()) {
-      sprite.renderAt(0, size.height - 80, canvas);
+      sprite.renderAt(0, 0, canvas);
     }
   }
 

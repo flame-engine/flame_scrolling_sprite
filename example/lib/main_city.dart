@@ -40,6 +40,5 @@ class MyGame extends Game {
 
   @override
   Color backgroundColor() => const Color(0xFF3f3f74);
-
 }
 

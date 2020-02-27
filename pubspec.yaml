@@ -1,7 +1,6 @@
 name: flame_scrolling_sprite
 description: Flame package adding a simple scrolling sprite to make it easy to repeat the same image over time.
 version: 0.0.1
-author:
 homepage:
 
 environment:

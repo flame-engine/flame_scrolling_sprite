@@ -112,7 +112,6 @@ class ScrollingSprite {
     }
     _chunks.forEach((rect) {
       _sprite.renderRect(canvas, rect);
-      // canvas.drawRect(rect, Paint()..color = Color(0xFFFF0000)..style = PaintingStyle.stroke);
     });
     if (clipToDimensions) {
       canvas.restore();

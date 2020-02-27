@@ -1,0 +1,19 @@
+name: flame_scrolling_sprite
+description: Flame package adding a simple scrolling sprite to make it easy to repeat the same image over time.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flame: ^0.18.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  meta: ^1.1.8
+
+flutter:

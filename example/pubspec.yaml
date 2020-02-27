@@ -1,0 +1,27 @@
+name: flame_scrolling_sprite_example
+description: a flame scrolling sprite example
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flame: ^0.18.1
+  flame_scrolling_sprite:
+    path: ../
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+
+flutter:
+  assets:
+    - assets/images/space.png
+    - assets/images/city.png
+
+    - assets/images/desert/clouds.png
+    - assets/images/desert/mountains.png
+    - assets/images/desert/ground.png
+    - assets/images/desert/train.png
+    - assets/images/desert/foreground.png

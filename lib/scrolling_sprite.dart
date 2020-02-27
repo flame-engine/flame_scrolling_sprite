@@ -2,6 +2,7 @@ import 'package:flame/sprite.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui';
 
+/// Describes a Sprite image that will animate on a axis resembling scroll moviment
 class ScrollingSprite {
   Sprite _sprite;
   double _width;
@@ -10,10 +11,23 @@ class ScrollingSprite {
   double _spriteHeight;
   final double verticalSpeed;
   final double horizontalSpeed;
+
+  ///
   final bool clipToDimensions;
 
   List<Rect> _chunks = [];
 
+  /// Constructs a [ScrollingSprite] with the following params:
+  ///
+  /// [spritePath] - Resource path of the sprite
+  /// [spriteX] and [spriteY] - X and Y coordinate do be used to map the sprite
+  /// [spriteWidth] and [spriteHeight] - Width and height of the mapped sprite
+  /// [spriteDestWidth] and [spriteDestHeight] - Destination width and height of the sprite, in case you want to scale its original size
+  /// [width] and [height] - Width and height of the total area where the sprites will scroll
+  /// [verticalSpeed] and [horizontalSpeed] - Vertical and horizontal speed of the scrolling speed in pixels per second
+  /// [clipToDimensions] - Since the sprites are scrolling on an endless manner, the sprite can be draw outside of its
+  /// area, by default, the package already clips the area to prevent it from showing, use this flag to change
+  /// this behaviour
   ScrollingSprite({
     @required String spritePath,
     double spriteX = 0.0,

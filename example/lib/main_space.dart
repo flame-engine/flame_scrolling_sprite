@@ -11,20 +11,17 @@ void main() async {
 }
 
 class MyGame extends Game {
-
   ScrollingSprite sprite;
   final Size size;
 
   MyGame(this.size) {
     sprite = ScrollingSprite(
-        spritePath: 'space.png',
-        width: size.width,
-        height: size.height,
-
-        verticalSpeed: 300,
-
-        spriteDestWidth: 500,
-        spriteDestHeight: 500,
+      spritePath: 'space.png',
+      width: size.width,
+      height: size.height,
+      verticalSpeed: 300,
+      spriteDestWidth: 500,
+      spriteDestHeight: 500,
     );
   }
 
@@ -43,4 +40,3 @@ class MyGame extends Game {
   @override
   Color backgroundColor() => const Color(0xFF3f3f74);
 }
-

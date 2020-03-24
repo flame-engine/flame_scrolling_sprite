@@ -42,7 +42,8 @@ class ScrollingSprite {
     this.horizontalSpeed = 0.0,
     this.clipToDimensions = true,
   }) {
-    Sprite.loadSprite(spritePath,
+    Sprite.loadSprite(
+      spritePath,
       x: spriteX,
       y: spriteY,
       width: spriteWidth,
@@ -64,12 +65,14 @@ class ScrollingSprite {
     _width = w;
     _calculate();
   }
+
   get width => _width;
 
   set height(double h) {
     _height = h;
     _calculate();
   }
+
   get height => _height;
 
   void _calculate() {
@@ -79,14 +82,8 @@ class ScrollingSprite {
 
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < columns; x++) {
-        _chunks.add(
-            Rect.fromLTWH(
-                (x * _spriteWidth),
-                (y * _spriteHeight),
-                _spriteWidth,
-                _spriteHeight
-            )
-        );
+        _chunks.add(Rect.fromLTWH((x * _spriteWidth), (y * _spriteHeight),
+            _spriteWidth, _spriteHeight));
       }
     }
   }

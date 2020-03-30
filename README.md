@@ -1,3 +1,6 @@
+[![Pub](https://img.shields.io/pub/v/flame_scrolling_sprite.svg?style=popout)](https://pub.dartlang.org/packages/flame_scrolling_sprite)
+![Build Status](https://img.shields.io/github/workflow/status/flame-engine/flame_scrolling_sprite/Test/master?label=tests)
+
 # Flame Scrolling Sprite
 
 Flame Scrolling Sprite is a [Flame](https://github.com/flame-engine/flame) package to make it easy to render sprites that scrolls and repeat itself forever given a velocity.
